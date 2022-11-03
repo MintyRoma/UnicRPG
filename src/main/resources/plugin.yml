@@ -1,0 +1,12 @@
+name: UnicRPG
+version: 0.1-166-BETA
+main: ru.unicorns.UnicRPG
+api-version: 1.19
+prefix: UnicRPG
+authors: [ _MintyR_ ]
+description: Plugin which adds RPG in game
+website: unicorns-group.ru
+commands:
+  unicstat:
+    description: Admin checking stat storage
+    usage: /<command>
