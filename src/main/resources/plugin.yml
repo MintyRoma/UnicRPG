@@ -9,4 +9,4 @@ website: unicorns-group.ru
 commands:
   unicstat:
     description: Admin checking stat storage
-    usage: /<command>
+    usage: /<command> <nickname> or /<command>
