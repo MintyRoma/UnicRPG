@@ -19,6 +19,7 @@
     <url>unicorns-group.ru</url>
 
     <build>
+        <!--suppress UnresolvedMavenProperty -->
         <finalName>UnicRPG-${git.commit.id.describe-short}</finalName>
         <plugins>
             <plugin>

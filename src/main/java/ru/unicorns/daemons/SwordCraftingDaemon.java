@@ -18,7 +18,6 @@ import ru.unicorns.objects.StatStorage;
 import ru.unicorns.objects.Stats;
 
 import java.util.Collections;
-import java.util.List;
 import java.util.Random;
 import java.util.UUID;
 
@@ -29,17 +28,16 @@ public class SwordCraftingDaemon implements Listener {
         Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.GREEN+"SwordCraftingDaemon..............✅");
     }
 
-    private Enchantment[] SwordEnchantments = {
-            Enchantment.BINDING_CURSE,
-            Enchantment.CHANNELING,
+    private final Enchantment[] SwordEnchantments = {
             Enchantment.DAMAGE_ALL,
             Enchantment.DAMAGE_UNDEAD,
-            Enchantment.DURABILITY,
-            Enchantment.FIRE_ASPECT,
-            Enchantment.IMPALING,
-            Enchantment.LOOT_BONUS_MOBS,
             Enchantment.VANISHING_CURSE,
-            Enchantment.KNOCKBACK
+            Enchantment.DAMAGE_ARTHROPODS,
+            Enchantment.KNOCKBACK,
+            Enchantment.FIRE_ASPECT,
+            Enchantment.LOOT_BONUS_MOBS,
+            Enchantment.SWEEPING_EDGE,
+            Enchantment.VANISHING_CURSE
     };
 
     @EventHandler
@@ -71,10 +69,10 @@ public class SwordCraftingDaemon implements Listener {
 
 
             int crafts = stats.WeaponCrafting; //количество крафтов
-            int Level = crafts/20; //уровень навыка
+            int Level = crafts/100; //уровень навыка
             float Chances = (float)Level/10; //шансы, для 11 уровня шанс равен 1.1
-            int Garants = (int) Chances/1; //гаранты на баф
-            float AddonChance = (float)Chances%1; //остаточный шанс получения доп бафа
+            int Garants = (int) Chances; //гаранты на баф
+            float AddonChance = Chances%1; //остаточный шанс получения доп бафа
             Bukkit.getLogger().info("[UnicRPG] Sword info:"+"\nCrafts:"+crafts+"\nLevel: "+Level+"\nChances: "+Chances+"\nGarants: "+Garants + "\nNon Garants: "+AddonChance);
             Random rnd = new Random();
             int AdditonBaf=0; //доп бафы
@@ -141,10 +139,11 @@ public class SwordCraftingDaemon implements Listener {
         return sword;
     }
 
+
     private ItemStack GenerateEnchant(ItemStack sword, int level) {
         Random rnd = new Random();
         int MaxEnchantLevel = 1;
-        if ((int)level/5!=1) MaxEnchantLevel = rnd.nextInt(1,level/5);
+        if ((int)level/10!=1) MaxEnchantLevel = rnd.nextInt(1,level/10);
         ItemMeta meta = sword.getItemMeta();
 
         Random rndech = new Random();
