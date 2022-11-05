@@ -15,7 +15,7 @@ public class UnicStatCommand implements CommandExecutor {
 
     public UnicStatCommand()
     {
-        Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.GREEN+"/unicstat.................✅ ");
+        Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.GREEN+"/unicstat\t✅ ");
     }
 
 

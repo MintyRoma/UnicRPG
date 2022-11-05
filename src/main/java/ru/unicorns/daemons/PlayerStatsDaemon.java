@@ -3,27 +3,19 @@ package ru.unicorns.daemons;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
-import com.sun.tools.javac.util.StringUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.event.player.PlayerQuitEvent;
 import ru.unicorns.objects.StatStorage;
 import ru.unicorns.objects.Stats;
 
 import java.io.File;
 import java.io.FileWriter;
-import java.lang.reflect.Array;
-import java.lang.reflect.Type;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -64,14 +56,14 @@ public class PlayerStatsDaemon implements Listener {
         }
         ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
         scheduler.scheduleAtFixedRate(new TimingExport(), 1, 1, TimeUnit.MINUTES);
-        Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.GREEN+"PlayerStatDaemon.................✅ ");
+        Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.GREEN+"PlayerStatDaemon\t✅ ");
     }
 
     @EventHandler
     public void PlayerImport(PlayerJoinEvent event)
     {
         String nickname = event.getPlayer().getName();
-        Boolean foundInStorage = false;
+        boolean foundInStorage = false;
         if (!StatStorage.PlayersStats.isEmpty()) {
             for (Stats st : StatStorage.PlayersStats) {
                 if (st.Nickname.equals(nickname)) {
@@ -81,7 +73,7 @@ public class PlayerStatsDaemon implements Listener {
                 }
             }
         }
-        if (foundInStorage==false)
+        if (!foundInStorage)
         {
             Stats stat = new Stats();
             stat.Nickname = nickname;

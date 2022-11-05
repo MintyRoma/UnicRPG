@@ -7,11 +7,11 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 import ru.unicorns.commands.UnicStatCommand;
 import ru.unicorns.daemons.PlayerStatsDaemon;
-import ru.unicorns.daemons.SwordCraftingDaemon;
+import ru.unicorns.daemons.WeaponCraftingDaemon;
 
 public final class UnicRPG extends JavaPlugin {
 
-    private SwordCraftingDaemon swordCraftingDaemon;
+    private WeaponCraftingDaemon weaponCraftingDaemon;
     private PlayerStatsDaemon playerStatsDaemon;
     @Override
     public void onEnable() {
@@ -19,10 +19,10 @@ public final class UnicRPG extends JavaPlugin {
         Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.WHITE+"Starting up daemons:");
 
         playerStatsDaemon = new PlayerStatsDaemon();
-        this.getServer().getPluginManager().registerEvents((Listener)this.playerStatsDaemon,(Plugin) this);
+        this.getServer().getPluginManager().registerEvents(this.playerStatsDaemon, this);
 
-        swordCraftingDaemon = new SwordCraftingDaemon();
-        this.getServer().getPluginManager().registerEvents((Listener) this.swordCraftingDaemon, (Plugin) this);
+        weaponCraftingDaemon = new WeaponCraftingDaemon();
+        this.getServer().getPluginManager().registerEvents(this.weaponCraftingDaemon, this);
 
         Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.WHITE+"Daemons succesfully started");
         Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.WHITE+"Registering commands:");

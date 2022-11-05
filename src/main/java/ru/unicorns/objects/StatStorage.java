@@ -12,6 +12,17 @@ import java.util.List;
 
 public class StatStorage {
 
+    //Global config
+    public static int WeaponCraftsForLevel = 1000;
+    public static int ArmorCraftsForLevel = 1000;
+    public static int KillsForLevel = 1000;
+    public static int RunForLevel = 1000;
+    public static int FoodCraftsForLevel = 1000;
+    public static int PotionCraftsForLevel = 1000;
+
+
+
+
     public static List<Stats> PlayersStats = new ArrayList<>();
 
     public static Stats getStatsByPlayer(Player player)
@@ -23,6 +34,26 @@ public class StatStorage {
         return new Stats();
     }
 
+    public static int getLevel(StatType stat, Player player)
+    {
+        Stats st = getStatsByPlayer(player);
+        switch (stat)
+        {
+            case WeaponCrafting:
+                return st.WeaponCrafting/WeaponCraftsForLevel;
+            case ArmorCrafting:
+                return st.ArmorCrafting/ArmorCraftsForLevel;
+            case PotionCrafting:
+                return st.PotionCrafting/PotionCraftsForLevel;
+            case FoodCrafting:
+                return st.FoodCrafting/FoodCraftsForLevel;
+            case Kills:
+                return st.Kills/KillsForLevel;
+            case Runer:
+                return st.Runer/RunForLevel;
+        }
+        return 0;
+    }
     public static void UpdateStats(Stats updated)
     {
         Stats old = null;
@@ -46,10 +77,10 @@ public class StatStorage {
         int WeponLevel = updated.WeaponCrafting;
 
         Player receiver = Bukkit.getServer().getPlayer(updated.Nickname);
-        if (WeponLevel%20==0)
+        if (WeponLevel%WeaponCraftsForLevel==0)
         {
             receiver.sendTitlePart(TitlePart.TITLE, Component.text(ChatColor.GOLD+"LEVEL UP!"));
-            receiver.sendTitlePart(TitlePart.SUBTITLE, Component.text("Ваш уровень крафта оружия достиг "+(int)WeponLevel/20+" !"));
+            receiver.sendTitlePart(TitlePart.SUBTITLE, Component.text("Ваш уровень крафта оружия достиг "+(int)WeponLevel/WeaponCraftsForLevel+" !"));
             receiver.playSound(receiver, Sound.ITEM_TOTEM_USE,1f, 1f);
         }
     }
