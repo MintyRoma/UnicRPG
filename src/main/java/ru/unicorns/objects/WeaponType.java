@@ -1,6 +1,9 @@
 package ru.unicorns.objects;
 
-public enum ItemType {
+/**
+ * Классификация предмета
+ */
+public enum WeaponType {
         sword,
         axe,
         pickaxe,
