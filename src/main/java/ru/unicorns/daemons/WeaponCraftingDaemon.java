@@ -70,9 +70,12 @@ public class WeaponCraftingDaemon implements Listener {
         if (!(event.getWhoClicked() instanceof Player)) return;
 
         Player player = ((Player)event.getWhoClicked());
+        Bukkit.getLogger().info(player.getName()+" crafted "+ResItem.name());
         int Level = StatStorage.getLevel(StatType.WeaponCrafting,player);
+        Bukkit.getLogger().info("Player's level is: "+Level);
         ItemStack result = event.getRecipe().getResult();
         int TotalBafs = CalculateBuffs(Level);
+        Bukkit.getLogger().info("Player's total buffs are: "+TotalBafs);
         ItemMeta i_meta = result.getItemMeta();
 
 
@@ -133,17 +136,17 @@ public class WeaponCraftingDaemon implements Listener {
             switch (step)
             {
                 case 0:
-                    Bukkit.getLogger().info("[UnicRPG] Assigned Enchant");
+                    Bukkit.getLogger().info("Enchant assigned");
                     itemMeta = GenerateEnchant(itemMeta,Level,type);
                     break;
 
                 case 1:
-                    Bukkit.getLogger().info("[UnicRPG] Assigned Durability");
+                    Bukkit.getLogger().info("Durability assigned");
                     itemMeta = GenerateAdditionDurability(itemMeta,Level);
                     break;
 
                 case 2:
-                    Bukkit.getLogger().info("[UnicRPG] Assigned Damage");
+                    Bukkit.getLogger().info("Attribute assigned");
                     itemMeta = GenerateAdditionAttribute(itemMeta,Level);
                     break;
                 default:
@@ -160,10 +163,10 @@ public class WeaponCraftingDaemon implements Listener {
      */
     private int CalculateBuffs(int Level)
     {
+        if (Level==0) return 0;
         float Chances = (float)Level/10; //шансы, для 11 уровня шанс равен 1.1
         int Garants = (int) Chances; //гаранты на баф
         float AddonChance = Chances%1; //остаточный шанс получения доп бафа
-        //Bukkit.getLogger().info("[UnicRPG] Sword info:"+"\nCrafts:"+crafts+"\nLevel: "+Level+"\nChances: "+Chances+"\nGarants: "+Garants + "\nNon Garants: "+AddonChance);
         Random rnd = new Random();
         int AdditonBaf=0; //доп бафы
         if (rnd.nextInt(0,10)<=AddonChance*10) AdditonBaf=1;
@@ -189,14 +192,17 @@ public class WeaponCraftingDaemon implements Listener {
             case 0:
                 AttributeModifier modifier = new AttributeModifier(UUID.randomUUID(), "generic.attackDamage", addition, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlot.HAND);
                 meta.addAttributeModifier(Attribute.GENERIC_ATTACK_DAMAGE,modifier);
+                Bukkit.getLogger().info("Attribute: ATTACK_DAMAGE +"+addition);
                 break;
             case 1:
                 AttributeModifier mod = new AttributeModifier(UUID.randomUUID(), "generic.attackSpeed", addition, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlot.HAND);
                 meta.addAttributeModifier(Attribute.GENERIC_ATTACK_SPEED,mod);
+                Bukkit.getLogger().info("Attribute: ATTACK_SPEED +"+addition);
                 break;
             case 2:
                 AttributeModifier mod1 = new AttributeModifier(UUID.randomUUID(), "generic.attackKnockback", addition, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlot.HAND);
                 meta.addAttributeModifier(Attribute.GENERIC_ATTACK_KNOCKBACK,mod1);
+                Bukkit.getLogger().info("Attribute: ATTACK_KNOCKBACK +"+addition);
                 break;
         }
         return meta;
@@ -213,6 +219,7 @@ public class WeaponCraftingDaemon implements Listener {
         int additionalDurability=1;
         if (level>20)additionalDurability= rnd.nextInt(1,level/10);
         meta.addEnchant(Enchantment.DURABILITY,additionalDurability,true);
+        Bukkit.getLogger().info("Durability: "+additionalDurability);
         return meta;
     }
 
@@ -252,7 +259,7 @@ public class WeaponCraftingDaemon implements Listener {
         }
         int EnchantLevel = 1;
         if (MaxEnchantLevel!=1) EnchantLevel = rndech.nextInt(1,MaxEnchantLevel);
-        Bukkit.getLogger().info("[UnicRPG] Enchant: "+ench.toString() +" "+ EnchantLevel);
+        Bukkit.getLogger().info("Enchant: "+ench.toString() +" "+ EnchantLevel);
 
         meta.addEnchant(ench,EnchantLevel,true);
         return meta;
