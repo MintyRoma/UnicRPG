@@ -10,9 +10,16 @@ import org.bukkit.entity.Player;
 import java.util.ArrayList;
 import java.util.List;
 
+
+/**
+ * Хранилище статов
+ */
 public class StatStorage {
 
     //Global config
+    /**
+     * Затраты для получения уровня
+     */
     public static int WeaponCraftsForLevel = 1000;
     public static int ArmorCraftsForLevel = 1000;
     public static int KillsForLevel = 1000;
@@ -21,10 +28,16 @@ public class StatStorage {
     public static int PotionCraftsForLevel = 1000;
 
 
-
-
+    /**
+     * Лист статов игроков
+     */
     public static List<Stats> PlayersStats = new ArrayList<>();
 
+    /**
+     * Получение класса статов игроково
+     * @param player класс Player игрока
+     * @return Stats статы игрока
+     */
     public static Stats getStatsByPlayer(Player player)
     {
         for(Stats st: PlayersStats)
@@ -34,6 +47,12 @@ public class StatStorage {
         return new Stats();
     }
 
+    /**
+     * Получение уровня навыка
+     * @param stat тип навыка по StatType
+     * @param player класс Player игрока
+     * @return int текущий уровень
+     */
     public static int getLevel(StatType stat, Player player)
     {
         Stats st = getStatsByPlayer(player);
@@ -54,6 +73,11 @@ public class StatStorage {
         }
         return 0;
     }
+
+    /**
+     * Обновляет статы игрока в базе
+     * @param updated Stats игрока
+     */
     public static void UpdateStats(Stats updated)
     {
         Stats old = null;
@@ -73,6 +97,10 @@ public class StatStorage {
         CheckForNewLevel(updated);
     }
 
+    /**
+     * Проверяет на изменение статов игрока для отображения анимации
+     * @param updated Stats игрока
+     */
     private static void CheckForNewLevel(Stats updated) {
         int WeponLevel = updated.WeaponCrafting;
 
@@ -80,8 +108,9 @@ public class StatStorage {
         if (WeponLevel%WeaponCraftsForLevel==0)
         {
             receiver.sendTitlePart(TitlePart.TITLE, Component.text(ChatColor.GOLD+"LEVEL UP!"));
-            receiver.sendTitlePart(TitlePart.SUBTITLE, Component.text("Ваш уровень крафта оружия достиг "+(int)WeponLevel/WeaponCraftsForLevel+" !"));
+            receiver.sendTitlePart(TitlePart.SUBTITLE, Component.text("Ваш уровень крафта оружия достиг "+ WeponLevel /WeaponCraftsForLevel+" !"));
             receiver.playSound(receiver, Sound.ITEM_TOTEM_USE,1f, 1f);
         }
     }
+
 }

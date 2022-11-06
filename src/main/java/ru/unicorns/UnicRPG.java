@@ -2,17 +2,26 @@ package ru.unicorns;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.event.Listener;
-import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 import ru.unicorns.commands.UnicStatCommand;
 import ru.unicorns.daemons.PlayerStatsDaemon;
 import ru.unicorns.daemons.WeaponCraftingDaemon;
+import ru.unicorns.objects.StatStorage;
 
 public final class UnicRPG extends JavaPlugin {
 
+    /**
+     * Демон крафта инструмнентов
+     */
     private WeaponCraftingDaemon weaponCraftingDaemon;
+    /**
+     * Демон конфига
+     */
     private PlayerStatsDaemon playerStatsDaemon;
+
+    /**
+     * При запуске, наследуется от JavaPlugin
+     */
     @Override
     public void onEnable() {
         Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.WHITE+"UnicRPG started");
@@ -29,9 +38,16 @@ public final class UnicRPG extends JavaPlugin {
         this.getCommand("unicstat").setExecutor(new UnicStatCommand());
     }
 
+    /**
+     * Действия при отключении плагина, наследуется от JavaPlugin
+     */
     @Override
     public void onDisable() {
         this.getLogger().info("Killing daemons");
+        weaponCraftingDaemon.Dispose();
+        //Other daemons here
+
+        playerStatsDaemon.Dispose();
         this.getLogger().info("Daemons killed");
         this.getLogger().info("Plugin disabled");
     }

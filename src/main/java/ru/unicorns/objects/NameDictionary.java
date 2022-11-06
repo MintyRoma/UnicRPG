@@ -5,6 +5,10 @@ import java.util.List;
 import java.util.Random;
 
 public class NameDictionary {
+
+    /**
+     * Список прилагательных для предметов крафта
+     */
     public static List<String> adjective = Arrays.asList("абсолютный",
             "адский",
             "азартный",
@@ -438,6 +442,12 @@ public class NameDictionary {
             "яростный",
             "ярый");
 
+
+    /**
+     * Функция генерации прилагательного для предмета крафта
+     * @param WomanForm Требуется ли женский род прилагательного
+     * @return string прилагательное
+     */
     public static String GetAdjective(boolean WomanForm)
     {
         Random rnd = new Random();
@@ -450,6 +460,11 @@ public class NameDictionary {
         return adjective;
     }
 
+    /**
+     * Генерация существительного для описания инструмента
+     * @param type тип оружия по WeaponType
+     * @return string с существительным
+     */
     public static String GetWeaponNoun(WeaponType type)
     {
         Random rnd = new Random();
@@ -469,26 +484,40 @@ public class NameDictionary {
         return "";
     }
 
+    /**
+     * Список существительных для меча
+     */
     public static List<String> SwordNouns = Arrays.asList("клинок",
             "меч",
             "нож",
             "ножик",
             "клиночек",
             "лезвиечко");
-
+    /**
+     * Список существительных для кирки
+     */
     public static List<String> PickaxeNouns = Arrays.asList("кирка",
             "сапа",
             "кайла");
+    /**
+     * Список существительных для топора
+     */
     public static List<String> AxeNouns = Arrays.asList("топор",
             "топорик",
             "тесак",
             "кельт");
+    /**
+     * Список существительных для мотыги
+     */
     public static List<String> HoeNouns = Arrays.asList("мотыга",
             "тяпка",
             "цапка",
             "сечка",
             "коса",
             "сапка");
+    /**
+     * Список существительных для лопаты
+     */
     public static List<String> ShovelNouns = Arrays.asList("лопатка",
             "лопата",
             "совок",

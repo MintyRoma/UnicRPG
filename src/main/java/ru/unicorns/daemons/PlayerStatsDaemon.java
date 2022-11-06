@@ -23,6 +23,10 @@ import java.util.concurrent.TimeUnit;
 
 
 public class PlayerStatsDaemon implements Listener {
+
+    /**
+     * Конструктор демона уведомляющий о готовности к работе и загружающий необходимые ресурсы
+     */
     public PlayerStatsDaemon()
     {
         try
@@ -59,6 +63,11 @@ public class PlayerStatsDaemon implements Listener {
         Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.GREEN+"PlayerStatDaemon\t✅ ");
     }
 
+    /**
+     * Проверка, что статы игрока существуют.
+     * Если не существуют - генерация нового класса статов
+     * @param event PlayerJoinEvent
+     */
     @EventHandler
     public void PlayerImport(PlayerJoinEvent event)
     {
@@ -84,9 +93,15 @@ public class PlayerStatsDaemon implements Listener {
 
     public void Dispose()
     {
-
+        TimingExport endexport = new TimingExport();
+        Thread childTread = new Thread(endexport);
+        childTread.run();
+        Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.RED+"PlayerStatsDaemon shutted down\t🛑");
     }
 
+    /**
+     * Экспорт информации о статах по расписанию в файл stats.dat
+     */
     private class TimingExport implements Runnable
     {
 

@@ -13,12 +13,23 @@ import ru.unicorns.objects.Stats;
 
 public class UnicStatCommand implements CommandExecutor {
 
+    /**
+     * Конструктор демона команды, которыц уведомляет о готовности демона
+     */
     public UnicStatCommand()
     {
         Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.GREEN+"/unicstat\t✅ ");
     }
 
 
+    /**
+     * Реакция демона на команду unicstat [Nickname]
+     * @param sender Отправитель команды
+     * @param command команда
+     * @param label метка (см документацию Spigot)
+     * @param args аргументы команды
+     * @return true
+     */
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args)
     {
@@ -41,6 +52,10 @@ public class UnicStatCommand implements CommandExecutor {
         return true;
     }
 
+    /**
+     * Сборка информации о всех игроках состоящих в хранилище статов
+     * @return string сообщение со статистикой
+     */
     private String ConstructDetalization() {
         String message = "";
         for (Stats st: StatStorage.PlayersStats)
@@ -56,6 +71,11 @@ public class UnicStatCommand implements CommandExecutor {
         return message;
     }
 
+    /**
+     * Сборка информации о статах конкретного игрока
+     * @param nickname никнейм игрока
+     * @return string сообщение о статах игрока
+     */
     private String ConstructDetalization(String nickname) {
         String message = "";
         Stats found = null;
