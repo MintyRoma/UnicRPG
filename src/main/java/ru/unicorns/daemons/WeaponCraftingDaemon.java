@@ -300,4 +300,7 @@ public class WeaponCraftingDaemon implements Listener {
         else return WeaponType.nonWeapon;
     }
 
+    public void Dispose() {
+        Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.RED+"WeaponCraftingDaemon shutted down\t🛑");
+    }
 }
