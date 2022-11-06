@@ -8,5 +8,5 @@ description: Plugin which adds RPG in game
 website: unicorns-group.ru
 commands:
   unicstat:
-    description: Admin checking stat storage
-    usage: /<command> <nickname> or /<command>
+    description: Проверка стиатистики по крафтам
+    usage: /unicstat <nickname> or /unicstat

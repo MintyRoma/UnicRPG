@@ -46,7 +46,7 @@ public class UnicStatCommand implements CommandExecutor {
         {
             ConsoleCommandSender console = Bukkit.getServer().getConsoleSender();
             console.sendMessage("Amount of Storage: "+count);
-            if (args[0]!=null) console.sendMessage(ConstructDetalization(args[0]));
+            if (args.length>1) console.sendMessage(ConstructDetalization(args[0]));
             else console.sendMessage(ConstructDetalization());
         }
         return true;
@@ -66,7 +66,8 @@ public class UnicStatCommand implements CommandExecutor {
                     "\nFood Crafting: "+st.FoodCrafting+
                     "\nPotion Crafting: "+st.PotionCrafting+
                     "\nKills: "+st.Kills+
-                    "\nRunned: "+st.Runer;
+                    "\nRunned: "+st.Runer+
+                    "\n==================";
         }
         return message;
     }
