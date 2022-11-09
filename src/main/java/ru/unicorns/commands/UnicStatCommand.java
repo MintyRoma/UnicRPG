@@ -35,19 +35,21 @@ public class UnicStatCommand implements CommandExecutor {
     {
         int count=0;
         if (!StatStorage.PlayersStats.isEmpty()) count = StatStorage.PlayersStats.size();
+        String message ="";
+        if (args.length>0) message = ConstructDetalization(args[0]);
+        else message=ConstructDetalization();
+
         if (sender instanceof Player)
         {
-            Player pl = (Player) sender;
+            Player pl = (Player)sender;
             pl.sendMessage("Amount of Storage: "+count);
-            if (args[0]!=null) pl.sendMessage(ConstructDetalization(args[0]));
-            else pl.sendMessage(ConstructDetalization());
+            pl.sendMessage(message);
         }
         else
         {
             ConsoleCommandSender console = Bukkit.getServer().getConsoleSender();
             console.sendMessage("Amount of Storage: "+count);
-            if (args.length>1) console.sendMessage(ConstructDetalization(args[0]));
-            else console.sendMessage(ConstructDetalization());
+            console.sendMessage(message);
         }
         return true;
     }
