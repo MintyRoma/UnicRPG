@@ -6,7 +6,6 @@ import org.bukkit.plugin.java.JavaPlugin;
 import ru.unicorns.commands.UnicStatCommand;
 import ru.unicorns.daemons.PlayerStatsDaemon;
 import ru.unicorns.daemons.WeaponCraftingDaemon;
-import ru.unicorns.objects.StatStorage;
 
 public final class UnicRPG extends JavaPlugin {
 
@@ -24,7 +23,7 @@ public final class UnicRPG extends JavaPlugin {
      */
     @Override
     public void onEnable() {
-        Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.WHITE+"UnicRPG started");
+        Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.WHITE+"UnicRPG v." + getDescription().getVersion()+" started");
         Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.WHITE+"Starting up daemons:");
 
         playerStatsDaemon = new PlayerStatsDaemon();

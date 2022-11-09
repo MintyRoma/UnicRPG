@@ -1,5 +1,5 @@
 name: UnicRPG
-version: 0.1
+version: ${git.commit.id.describe-short}
 main: ru.unicorns.UnicRPG
 api-version: 1.19
 prefix: UnicRPG
